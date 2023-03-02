@@ -92,11 +92,9 @@ const  showModel =(data)=>{
         
          <p class="card-text">${data.description}</p>
           <div class="">
-          <button type="button" class="btn  btn-outline-primary disabled mb-2">${data.pricing[0].price
-          } <br> ${data.pricing[0].plan}</button>
-          <button type="button" class="btn btn-outline-success mb-2 disabled">${data.pricing[1].price
-          } <br> ${data.pricing[1].plan}</button>
-          <button type="button" class="btn btn-outline-danger disabled">${data.pricing[2].price
+          <button type="button" class="btn  btn-outline-primary disabled mb-2">${data.pricing[0].price ? data.pricing[0].price:'Free of cost' } <br> ${data.pricing[0].plan}</button>
+          <button type="button" class="btn btn-outline-success mb-2 disabled">${data.pricing[1].price?data.pricing[1].price:'Free of cost'} <br> ${data.pricing[1].plan}</button>
+          <button type="button" class="btn btn-outline-danger disabled">${data.pricing[2].price ? data.pricing[2].price: 'Free of cost'
           } <br> ${data.pricing[2].plan}</button>
            </div>
 
