@@ -10,9 +10,14 @@ const dataFetch = ()=>{
 const showData = data =>{
     // console.log(data)
      const cardContainer = document.getElementById('card-container');
+      //data= data.slice(0,10);
+      if(data.length>10){
+         data = data.slice(0,10);
+         const showAll = document.getElementById('show-all')
+      }
 
      data.forEach(element => {
-       // console.log(element)
+        console.log(element)
         
         const div = document.createElement('div');
        
@@ -23,15 +28,19 @@ const showData = data =>{
         <div class="card h-100">
           <img src=${element.image} class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title"> Features
+            <h5 class="card-title"> 
              <div>
-               <ol class="list-group list-group-numbered">
-               
-              </ol>      
+            
+             <h4>Features</h4>
+             <ol>
+             <li>${element.features[0]}</li>
+             <li>${element.features[1]}</li>
+             <li>${element.features[2]}</li>
+           </ol>
             </div>
             
             </h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+           
           </div>
          
           <div class="card-footer d-flex justify-content-between">
@@ -58,10 +67,71 @@ const modalDemo=(data)=>{
     const url =`https://openapi.programming-hero.com/api/ai/tool/${data}`
     fetch(url)
     .then(res=>res.json())
-    .then(data=>console.log(data.data))
+    .then(data=>showModel(data.data))
    
      
 }
 const  showModel =(data)=>{
+    console.log(data)
+     const modal = document.getElementById('modal-id');
+     const div = document.createElement('div');
+     modal.innerHTML=" ";
+     div.innerHTML =`
+
+     <div class="row row-cols-1 row-cols-md-2 g-4">
+     <div class="col">
+     <div class="card">
       
+       <div class="card-body">
+        
+         <p class="card-text">${data.description}</p>
+          <div class="">
+          <button type="button" class="btn  btn-outline-primary disabled mb-2">${data.pricing[0].price
+          } <br> ${data.pricing[0].plan}</button>
+          <button type="button" class="btn btn-outline-success mb-2 disabled">${data.pricing[1].price
+          } <br> ${data.pricing[1].plan}</button>
+          <button type="button" class="btn btn-outline-danger disabled">${data.pricing[2].price
+          } <br> ${data.pricing[2].plan}</button>
+           </div>
+
+           <div>
+               <h4>Features</h4>
+               <ul>
+               <li>${data.features[1].feature_name}</li>
+               <li>${data.features[2].feature_name}</li>
+               <li>${data.features[3].feature_name}</li>
+             </ul>
+
+           </div>
+           <div>
+               <h4>Integrations</h4>
+               <ul>
+               <li>${data.integrations[0]}</li>
+               <li>${data.integrations[1]}</li>
+               <li>${data.integrations[2]}</li>
+             </ul>
+
+           </div>
+        
+       </div>
+     </div>
+   </div> 
+   <div class="col">
+     <div class="card">
+        <div class="position-relative">
+         <button type="button" class="btn btn-danger p-2 position-absolute top-0 end-0">${data.accuracy.score *100}% accuracy</button>
+       </div>
+    
+     <img src=${data.image_link[0]} class="card-img-top" alt="...">
+       <div class="card-body">
+         <h5 class="card-title">${data.input_output_examples[0].input}</h5>
+         <p class="card-text">${data.input_output_examples[0].output}</p>
+       </div>
+     </div>
+   </div>           
+                    
+      </div>
+     
+     `;
+     modal.appendChild(div);
 }
