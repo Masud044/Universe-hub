@@ -11,10 +11,15 @@ const showData = data =>{
     // console.log(data)
      const cardContainer = document.getElementById('card-container');
       //data= data.slice(0,10);
-      if(data.length>10){
-         data = data.slice(0,10);
-         const showAll = document.getElementById('show-all')
-      }
+     // const showAll = document.getElementById('show-all');
+     // if(data.length>10){
+        // data = data.slice(0,10);
+        // showAll.classList.remove('d-none');
+         
+     // }
+     // else{
+        // showAll.classList.add('d-none');
+     // }
 
      data.forEach(element => {
         console.log(element)
@@ -62,6 +67,7 @@ const showData = data =>{
      
 
 }
+  
 
 const modalDemo=(data)=>{
     const url =`https://openapi.programming-hero.com/api/ai/tool/${data}`
@@ -119,7 +125,7 @@ const  showModel =(data)=>{
    <div class="col">
      <div class="card">
         <div class="position-relative">
-         <button type="button" class="btn btn-danger p-2 position-absolute top-0 end-0">${data.accuracy.score *100}% accuracy</button>
+         <button type="button" class="btn btn-danger p-2 position-absolute top-0 end-0">${data.accuracy.score *100  ? data.accuracy.score *100+'% accuracy': 'not accuracy' }</button>
        </div>
     
      <img src=${data.image_link[0]} class="card-img-top" alt="...">
@@ -135,3 +141,5 @@ const  showModel =(data)=>{
      `;
      modal.appendChild(div);
 }
+
+
