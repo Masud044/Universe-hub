@@ -7,19 +7,20 @@ const dataFetch = ()=>{
         ))
         
 }
-
-
+ 
 const showData = (data) =>{
-    // console.log(data)
+   
      const cardContainer = document.getElementById('card-container');
+   
       const remaining = data.slice(6,12);
+      
       loading(true);
     
-     
+    
      
       const showAll = document.getElementById('show-all');
          
-      
+     
       if( data.length>6){
          
          data = data.slice(0,6);
@@ -29,8 +30,10 @@ const showData = (data) =>{
              if(data.slice(0,6)){
              
               document.getElementById('btn-show-all').addEventListener('click',function(){
-                
+               
                   showData(remaining);
+               
+                
                   loading(false);   
                  
               })
@@ -44,17 +47,13 @@ const showData = (data) =>{
       else{
          showAll.classList.add('d-none');
       }
-
+      
      
      data.forEach(element => {
 
-      const ss = [];
-      document.getElementById('btn-date').addEventListener('click',function(){
-          ss.push(element.published_in);
-            console.log(ss);
-            
-      })
-       // console.log(element)
+     
+    
+      
       
        
         const div = document.createElement('div');
@@ -65,7 +64,7 @@ const showData = (data) =>{
         div.innerHTML = `
         <div class="col">
         <div class="card h-100">
-          <img src=${element.image} class="card-img-top" alt="...">
+          <img  src=${element.image} class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title"> 
              <div>
@@ -99,8 +98,7 @@ const showData = (data) =>{
         cardContainer.appendChild(div);
        
      });
-     // loading(false);
-     
+    
      
      
 
@@ -117,13 +115,13 @@ const modalDemo=(data)=>{
      
 }
 const  showModel =(data)=>{
-    console.log(data)
+   
    let integration = data.integrations;
    if(integration === null){
     integration = [];
    }
    let price = data.pricing;
-   //console.log(price);
+ 
    if(price == null){
        price = 'not found';
    }
@@ -133,7 +131,7 @@ const  showModel =(data)=>{
     }
    
   
-   //console.log(integration);
+  
      const modal = document.getElementById('modal-id');
      const div = document.createElement('div');
      modal.innerHTML=" ";
@@ -194,7 +192,7 @@ const  showModel =(data)=>{
      modal.appendChild(div);
 }
   const loading = load =>{
-   // console.log(load);
+  
   const loader = document.getElementById('loader');
   if(load){
      loader.classList.remove('d-none');
@@ -205,9 +203,27 @@ const  showModel =(data)=>{
 
 }
 
-//const dateSort=()=>{
+  const sortingFetch=()=>{
    
-    
-//}
+       const url = `https://openapi.programming-hero.com/api/ai/tools`;
+       fetch(url)
+      .then(res=>res.json())
+      .then(data=>sortingData(data.data.tools
+ 
+         ))
+         
+ 
+  }
+  const sortingData =(data)=>{
+     
+
+       data.sort(function(a,b){
+          return new Date(a.published_in) - new Date(b.published_in);
+      });
+   
+     const cardContainer = document.getElementById('card-container');
+     cardContainer.innerHTML = '';
+      showData(data);
+  }
 
 
