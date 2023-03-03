@@ -20,13 +20,14 @@ const showData = data =>{
      // else{
         // showAll.classList.add('d-none');
      // }
-
+     loading(true);
      data.forEach(element => {
         console.log(element)
         
         const div = document.createElement('div');
        
         div.classList.add('col');
+       
       
         div.innerHTML = `
         <div class="col">
@@ -62,9 +63,22 @@ const showData = data =>{
         
         `;
         cardContainer.appendChild(div);
+       
      });
     
+     loading(false);
      
+
+}
+
+const loading = load =>{
+   const loader = document.getElementById('loader');
+   if(loading){
+      loader.classList.remove('d-none');
+   }
+   else{
+      loader.classList.add('d-none');
+   }
 
 }
   
