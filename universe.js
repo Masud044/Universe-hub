@@ -5,24 +5,37 @@ const dataFetch = ()=>{
      .then(data=>showData(data.data.tools
 
         ))
+        
 }
 
-const showData = data =>{
+const showData = (data) =>{
     // console.log(data)
      const cardContainer = document.getElementById('card-container');
-      //data= data.slice(0,10);
-     // const showAll = document.getElementById('show-all');
-     // if(data.length>10){
-        // data = data.slice(0,10);
-        // showAll.classList.remove('d-none');
-         
-     // }
-     // else{
-        // showAll.classList.add('d-none');
-     // }
      loading(true);
+      //data= data.slice(0,10);
+      const showAll = document.getElementById('show-all');
+      if( data.length>6){
+         data = data.slice(0,6);
+            showAll.classList.remove('d-none');
+         
+      }
+     else if(data.length<=12){
+        document.getElementById('btn-show-all').addEventListener('click',function(){
+            //data = data.slice(0,12);
+           showData(data);
+             console.log(data)
+        })
+       }
+    
+      else{
+         showAll.classList.add('d-none');
+      }
+
+     
+     
+    
      data.forEach(element => {
-        console.log(element)
+       // console.log(element)
         
         const div = document.createElement('div');
        
@@ -65,11 +78,13 @@ const showData = data =>{
         cardContainer.appendChild(div);
        
      });
+     
     
      loading(false);
      
 
 }
+
 
 const loading = load =>{
    const loader = document.getElementById('loader');
@@ -81,6 +96,10 @@ const loading = load =>{
    }
 
 }
+
+
+dataFetch();
+ 
   
 
 const modalDemo=(data)=>{
