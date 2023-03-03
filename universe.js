@@ -14,20 +14,28 @@ const showData = (data) =>{
      const cardContainer = document.getElementById('card-container');
       const remaining = data.slice(6,12);
     
-     loading(true);
+     
      
       const showAll = document.getElementById('show-all');
+         loading(true);
+      
       if( data.length>6){
+         
          data = data.slice(0,6);
+            
             showAll.classList.remove('d-none');
+            
              if(data.slice(0,6)){
+             
               document.getElementById('btn-show-all').addEventListener('click',function(){
                 
                   showData(remaining);
+                  loading(false);   
                  
               })
+              
              }
-            
+               
          
       }
     
@@ -38,7 +46,8 @@ const showData = (data) =>{
 
      
      
-    
+     
+
      data.forEach(element => {
        // console.log(element)
         
@@ -80,32 +89,18 @@ const showData = (data) =>{
       </div>
         
         `;
+       
         cardContainer.appendChild(div);
        
      });
+     // loading(false);
      
-    
-     loading(false);
+     
      
 
 }
 
 
-const loading = load =>{
-   const loader = document.getElementById('loader');
-   if(loading){
-      loader.classList.remove('d-none');
-   }
-   else{
-      loader.classList.add('d-none');
-   }
-
-}
-
-
-dataFetch();
- 
-  
 
 const modalDemo=(data)=>{
     const url =`https://openapi.programming-hero.com/api/ai/tool/${data}`
@@ -139,7 +134,7 @@ const  showModel =(data)=>{
            <div>
                <h4>Features</h4>
                <ul>
-               <li>${data.features[1].feature_name}</li>
+               <li>${data.features[1].feature_name === undefined ? 'd-none':data.features[1].feature_name}</li>
                <li>${data.features[2].feature_name}</li>
                <li>${data.features[3].feature_name}</li>
              </ul>
@@ -176,6 +171,17 @@ const  showModel =(data)=>{
      
      `;
      modal.appendChild(div);
+}
+  const loading = load =>{
+   // console.log(load);
+  const loader = document.getElementById('loader');
+  if(load){
+     loader.classList.remove('d-none');
+  }
+  else{
+     loader.classList.add('d-none');
+  }
+
 }
 
 
