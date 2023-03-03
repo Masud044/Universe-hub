@@ -8,24 +8,29 @@ const dataFetch = ()=>{
         
 }
 
+
 const showData = (data) =>{
     // console.log(data)
      const cardContainer = document.getElementById('card-container');
+      const remaining = data.slice(6,12);
+    
      loading(true);
-      //data= data.slice(0,10);
+     
       const showAll = document.getElementById('show-all');
       if( data.length>6){
          data = data.slice(0,6);
             showAll.classList.remove('d-none');
+             if(data.slice(0,6)){
+              document.getElementById('btn-show-all').addEventListener('click',function(){
+                
+                  showData(remaining);
+                 
+              })
+             }
+            
          
       }
-     else if(data.length<=12){
-        document.getElementById('btn-show-all').addEventListener('click',function(){
-            //data = data.slice(0,12);
-           showData(data);
-             console.log(data)
-        })
-       }
+    
     
       else{
          showAll.classList.add('d-none');
