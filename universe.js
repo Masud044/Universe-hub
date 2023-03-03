@@ -9,6 +9,9 @@ const dataFetch = ()=>{
 }
  
 const showData = (data) =>{
+
+      
+
    
      const cardContainer = document.getElementById('card-container');
    
@@ -20,33 +23,36 @@ const showData = (data) =>{
      
       const showAll = document.getElementById('show-all');
          
-     
+     if(data[0].id !== '04'){
       if( data.length>6){
          
-         data = data.slice(0,6);
-            
-            showAll.classList.remove('d-none');
-            
-             if(data.slice(0,6)){
-             
-              document.getElementById('btn-show-all').addEventListener('click',function(){
-               
-                  showData(remaining);
-               
-                
-                  loading(false);   
-                 
-              })
-              
-             }
-               
+      data = data.slice(0,6);
          
-      }
+         showAll.classList.remove('d-none');
+         
+          if(data.slice(0,6)){
+          
+           document.getElementById('btn-show-all').addEventListener('click',function(){
+            
+               showData(remaining);
+            
+             
+               loading(false);   
+              
+           })
+           
+          }
+            
+      
+   }
+   else{
+    showAll.classList.add('d-none');
+ }
+  }
+      
     
     
-      else{
-         showAll.classList.add('d-none');
-      }
+     
       
      
      data.forEach(element => {
@@ -223,7 +229,11 @@ const  showModel =(data)=>{
    
      const cardContainer = document.getElementById('card-container');
      cardContainer.innerHTML = '';
+     const showAll = document.getElementById('show-all');
+     showAll.classList.add('d-none');
+    
       showData(data);
+      document.getElementById('loader').classList.add('d-none');
   }
 
 
